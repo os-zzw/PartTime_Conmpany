@@ -3,13 +3,147 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
 
+        <TextView
+            android:text="公司名："
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:id="@+id/textView"
+            android:layout_marginLeft="50dp" />
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:inputType="textPersonName"
+            android:id="@+id/editText"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
+
+        <TextView
+            android:text="工作类型："
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/textView2"
+            />
+
+        <Spinner
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:id="@+id/spinner2"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="工作薪资："
+            android:layout_marginLeft="30dp"
+            android:id="@+id/textView3"
+            />
+
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/editText2"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="工作日期："
+            android:layout_marginLeft="30dp"
+            android:id="@+id/textView4"
+            />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:inputType="textPersonName"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/editText3"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="备注："
+            android:layout_marginLeft="30dp"
+            android:id="@+id/textView5"
+            />
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="145dp">
 
-        
+        <EditText
+            android:layout_width="350dp"
+            android:layout_height="140dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:textSize="15dp"
+            android:id="@+id/editText4"
+            />
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        >
 
+        <Button
+            android:text="提交"
+            android:textSize="20dp"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:layout_marginLeft="50dp"
+            />
+
+        <Button
+            android:text="取消"
+            android:textSize="20dp"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:layout_marginLeft="30dp"
+            />
+
+    </LinearLayout>
 </LinearLayout>
