@@ -42,7 +42,7 @@ public class MeFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=null;
                 if (position==0){
-                    //intent=new Intent(getActivity(),ResumeActivity.class);
+                    intent=new Intent(getActivity(),CompanyActivity.class);
                 }else {
                     intent=new Intent(getActivity(),ReleaseActivity.class);
                 }

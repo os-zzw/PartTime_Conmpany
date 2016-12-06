@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.zzw.john.parttime_conmpany"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zzw.john.parttime_conmpany">
 
     <application
         android:name=".base.MyApplication"
@@ -11,16 +11,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".model.login.LoginActivity">
-
-        </activity>
-        <activity android:name=".model.register.RegisterActivity"/>
-        <activity android:name=".model.me.ReleaseActivity"/>
+        <activity android:name=".model.login.LoginActivity"></activity>
+        <activity android:name=".model.register.RegisterActivity" />
+        <activity android:name=".model.me.ReleaseActivity" />
+        <activity android:name=".model.me.CompanyActivity"></activity>
     </application>
 
 </manifest>
