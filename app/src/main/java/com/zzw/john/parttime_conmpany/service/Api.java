@@ -30,4 +30,6 @@ public interface Api {
             @Query("nickname") String nickname,
             @Query("password") String password
     );
+
+    //发布兼职
 }
