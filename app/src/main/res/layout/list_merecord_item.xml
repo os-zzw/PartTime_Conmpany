@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="120dp"
+    android:background="@drawable/resume_border">
+
+    <LinearLayout
+        android:id="@+id/stateLLO"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/stateTV"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="22dp"
+            android:gravity="center"
+            android:textColor="#000"/>
+
+        <Button
+            android:id="@+id/detailBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:text="详细信息"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/stateLLO"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/jobNameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="24dp"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="工作名字"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/typeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="工作类型:"/>
+
+            <TextView
+                android:id="@+id/jobTypeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/typeTV"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="周末兼职"/>
+
+            <TextView
+                android:id="@+id/jobSexTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="不限"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/jobSexTV"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="性别要求:"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/salaryTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="薪资:"/>
+
+            <TextView
+                android:id="@+id/jobSalaryTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/salaryTV"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="200-500"/>
+
+            <TextView
+                android:id="@+id/jobNumTV"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="不限"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/jobNumTV"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:text="人数需求:"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

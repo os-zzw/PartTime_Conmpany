@@ -43,6 +43,8 @@ public class MeFragment extends Fragment {
                 Intent intent=null;
                 if (position==0){
                     intent=new Intent(getActivity(),CompanyActivity.class);
+                }else if (position==1){
+                    intent=new Intent(getActivity(),RecordActivity.class);
                 }else {
                     intent=new Intent(getActivity(),ReleaseActivity.class);
                 }
@@ -64,7 +66,7 @@ public class MeFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -87,7 +89,9 @@ public class MeFragment extends Fragment {
             listNameTV=(TextView)convertView.findViewById(R.id.listNameTV);
             if (position==0) {
                 listNameTV.setText("公司信息");
-            }else {
+            }else if (position==1){
+                listNameTV.setText("我的发布");
+            }else{
                 listNameTV.setText("发布兼职");
             }
             return convertView;

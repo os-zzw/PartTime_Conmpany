@@ -47,6 +47,7 @@ public interface Api {
             @Query("num") int num
 
     );
+
     //获得我发布的所有兼职
     @POST("job/queryAllMyJob/{employerID}")
     Observable<JobBean> queryAllMyJob(
