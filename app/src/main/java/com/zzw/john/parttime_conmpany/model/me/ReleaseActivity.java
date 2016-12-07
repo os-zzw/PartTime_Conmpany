@@ -1,5 +1,6 @@
 package com.zzw.john.parttime_conmpany.model.me;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,9 +13,18 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.orhanobut.logger.Logger;
 import com.zzw.john.parttime_conmpany.R;
+import com.zzw.john.parttime_conmpany.base.MyApplication;
+import com.zzw.john.parttime_conmpany.bean.JobBean;
 import com.zzw.john.parttime_conmpany.componments.ApiClient;
 import com.zzw.john.parttime_conmpany.service.Api;
+import com.zzw.john.parttime_conmpany.utils.UIUtils;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class ReleaseActivity extends AppCompatActivity {
@@ -24,6 +34,7 @@ public class ReleaseActivity extends AppCompatActivity {
     private EditText Salary ;
     private EditText Place ;
     private EditText Remarks ;
+    private EditText Num;
     private Button msg_btn;
     private Button msg_btn2;
 
@@ -33,6 +44,7 @@ public class ReleaseActivity extends AppCompatActivity {
     private String salary;
     private String result;
     private String sex;
+    private int num;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,13 +95,11 @@ public class ReleaseActivity extends AppCompatActivity {
         });
 
         Jobname=(EditText)findViewById(R.id.editText);
-        jobname=Jobname.getText().toString();
         Salary=(EditText)findViewById(R.id.editText2);
-        salary=Salary.getText().toString();
         Place=(EditText)findViewById(R.id.editText3);
-        place=Place.getText().toString();
         Remarks=(EditText)findViewById(R.id.editText4);
-        remarks=Remarks.getText().toString();
+        Num=(EditText)findViewById(R.id.editText5);
+
 
         msg_btn =(Button)findViewById(R.id.button);
         msg_btn.setOnClickListener(submit);
@@ -99,13 +109,38 @@ public class ReleaseActivity extends AppCompatActivity {
 
     private Button.OnClickListener submit=new View.OnClickListener(){
         public void onClick(View view){
+            jobname=Jobname.getText().toString();
+            salary=Salary.getText().toString();
+            place=Place.getText().toString();
+            remarks=Remarks.getText().toString();
+            num =Integer.valueOf(Num.getText().toString()).intValue();
+            Observable<JobBean> ADD = api.add(Integer.toString(MyApplication.employerBean.getId()),result,jobname,sex,salary,place,remarks,num);
+            ADD.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<JobBean>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+                        @Override
+                        public void onError(Throwable e) {
+                            Logger.d(e);
+                            Toast.makeText(ReleaseActivity.this, "出现错误,请重试!", Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onNext(JobBean jobBean){
+                            ReleaseActivity.this.finish();
+                        }
+                        }
+
+                    );
 
         }
     };
 
     private Button.OnClickListener fetch=new View.OnClickListener(){
         public void onClick(View view){
-
+            ReleaseActivity.this.finish();
         }
     };
 }

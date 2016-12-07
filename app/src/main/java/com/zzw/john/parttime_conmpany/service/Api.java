@@ -35,7 +35,18 @@ public interface Api {
     );
 
     //发布兼职
+    @POST("job/add")
+    Observable<JobBean> add(
+            @Query("employerID") String employerID,
+            @Query("type") String type,
+            @Query("name") String name,
+            @Query("sex") String sex,
+            @Query("salary") String salary,
+            @Query("address") String address,
+            @Query("remark") String remark,
+            @Query("num") int num
 
+    );
     //获得我发布的所有兼职
     @POST("job/queryAllMyJob/{employerID}")
     Observable<JobBean> queryAllMyJob(
@@ -47,4 +58,5 @@ public interface Api {
     Observable<JobBean> queryStatusRecordByEmployerID(
             @Query("employerID") Integer employerID
     );
+
 }
