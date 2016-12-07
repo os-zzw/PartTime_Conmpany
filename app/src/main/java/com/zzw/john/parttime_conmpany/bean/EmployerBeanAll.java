@@ -18,40 +18,12 @@ public class EmployerBeanAll extends BaseBean {
     }
 
     public static class EmployerBean {
-        private String advantage;
-        private int age;
-        private int height;
         private int id;
-        private String intent;
-        private String name;
+        private String companyName;
+        private String location;
         private String nickname;
         private String password;
-        private String schoolName;
-        private String sex;
-
-        public String getAdvantage() {
-            return advantage;
-        }
-
-        public void setAdvantage(String advantage) {
-            this.advantage = advantage;
-        }
-
-        public int getAge() {
-            return age;
-        }
-
-        public void setAge(int age) {
-            this.age = age;
-        }
-
-        public int getHeight() {
-            return height;
-        }
-
-        public void setHeight(int height) {
-            this.height = height;
-        }
+        private String remark;
 
         public int getId() {
             return id;
@@ -61,20 +33,20 @@ public class EmployerBeanAll extends BaseBean {
             this.id = id;
         }
 
-        public String getIntent() {
-            return intent;
+        public String getCompanyName() {
+            return companyName;
         }
 
-        public void setIntent(String intent) {
-            this.intent = intent;
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
         }
 
-        public String getName() {
-            return name;
+        public String getLocation() {
+            return location;
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setLocation(String location) {
+            this.location = location;
         }
 
         public String getNickname() {
@@ -93,20 +65,12 @@ public class EmployerBeanAll extends BaseBean {
             this.password = password;
         }
 
-        public String getSchoolName() {
-            return schoolName;
+        public String getRemark() {
+            return remark;
         }
 
-        public void setSchoolName(String schoolName) {
-            this.schoolName = schoolName;
-        }
-
-        public String getSex() {
-            return sex;
-        }
-
-        public void setSex(String sex) {
-            this.sex = sex;
+        public void setRemark(String remark) {
+            this.remark = remark;
         }
     }
 }

@@ -18,14 +18,14 @@ public interface Api {
 
 
     //注册
-    @POST("employee/register")
+    @POST("employer/register")
     Observable<BaseBean> register(
             @Query("nickname") String nickname,
             @Query("password") String password
     );
 
     //登录
-    @POST("employee/login")
+    @POST("employer/login")
     Observable<EmployerBeanAll> login(
             @Query("nickname") String nickname,
             @Query("password") String password

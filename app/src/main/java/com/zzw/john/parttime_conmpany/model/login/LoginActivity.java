@@ -9,8 +9,10 @@ import android.view.View;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.orhanobut.logger.Logger;
 import com.zzw.john.parttime_conmpany.MainActivity;
 import com.zzw.john.parttime_conmpany.R;
+import com.zzw.john.parttime_conmpany.base.MyApplication;
 import com.zzw.john.parttime_conmpany.bean.EmployerBeanAll;
 import com.zzw.john.parttime_conmpany.componments.ApiClient;
 import com.zzw.john.parttime_conmpany.model.register.RegisterActivity;
@@ -22,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -72,11 +75,22 @@ public class LoginActivity extends AppCompatActivity {
                     Observable<EmployerBeanAll> register = api.login(nickname, password);
                     register.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Action1<EmployerBeanAll>() {
+                            .subscribe(new Subscriber<EmployerBeanAll>() {
                                 @Override
-                                public void call(EmployerBeanAll employerBeanAll) {
-                                    String flag = employerBeanAll.getFlag();
+                                public void onCompleted() {
+
+                                }
+                                @Override
+                                public void onError(Throwable e) {
+                                    Logger.d(e);
+                                    UIUtils.showToast("超时,请重试!");
+                                }
+                                @Override
+                                public void onNext(EmployerBeanAll employeeBeanAll) {
+                                    String flag = employeeBeanAll.getFlag();
                                     if (flag.equals("true")) {
+                                        //保存个人信息
+                                        MyApplication.employerBean = employeeBeanAll.getEmployer();
                                         //跳转主页
                                         Intent main = new Intent(LoginActivity.this, MainActivity.class);
                                         startActivity(main);
