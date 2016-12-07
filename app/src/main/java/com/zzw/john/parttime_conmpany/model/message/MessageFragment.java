@@ -4,24 +4,36 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.zzw.john.parttime_conmpany.R;
+import com.zzw.john.parttime_conmpany.base.MyApplication;
 import com.zzw.john.parttime_conmpany.bean.JobBean;
 import com.zzw.john.parttime_conmpany.componments.ApiClient;
 import com.zzw.john.parttime_conmpany.service.Api;
 import com.zzw.john.parttime_conmpany.utils.UIUtils;
 
 import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 /**
@@ -31,6 +43,7 @@ import java.util.List;
 public class MessageFragment extends Fragment {
 
     private ListView messageLV;
+    private ScrollView messageSV;
     private SwipeRefreshLayout messageSRLO;
     private ProgressDialog progressDialog;
 
@@ -51,23 +64,74 @@ public class MessageFragment extends Fragment {
 
     private void initView(View view) {
         messageLV=(ListView)view.findViewById(R.id.messageLV);
+        messageSV=(ScrollView)view.findViewById(R.id.messageSV);
         messageSRLO=(SwipeRefreshLayout)view.findViewById(R.id.messageSRLO);
+
+        messageLV.setOnScrollListener(new SwipeListViewOnScrollListener(messageSRLO, new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        }));
+
         messageSRLO.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-//                initData(1);
+                initData(1);
             }
         });
 
-//        progressDialog=new ProgressDialog(getActivity());
-//        progressDialog.setCancelable(false);
-//        progressDialog.setMessage("请稍等");
-//        progressDialog.show();
+        progressDialog=new ProgressDialog(getActivity());
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("请稍等");
+        progressDialog.show();
     }
 
     private void initData(final int type) {
-        messageLV.setAdapter(new MessageListAdapter(null,null));
+        Observable<JobBean> jobBeanObservable = api.queryStatusRecordByEmployerID(MyApplication.employerBean.getId());
+        jobBeanObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<JobBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (type==0)
+                            progressDialog.dismiss();
+                        else
+                            refreshHandler.sendEmptyMessage(0);
+                        Logger.d(e);
+                        UIUtils.showToast("超时,请重试!");
+                    }
+
+                    @Override
+                    public void onNext(JobBean jobBean) {
+                        if (type==0)
+                            progressDialog.dismiss();
+                        else
+                            refreshHandler.sendEmptyMessage(0);
+                        messageLV.setAdapter(new MessageListAdapter(jobBean.getJobList(),jobBean.getNameList()));
+                    }
+                });
     }
+
+    public Handler refreshHandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what==0){
+                messageSRLO.setRefreshing(false);
+            }
+        }
+    };
 
     //适配器
     private class MessageListAdapter extends BaseAdapter {
@@ -84,7 +148,7 @@ public class MessageFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 5;
+            return jobList.size();
         }
 
         @Override
@@ -116,11 +180,11 @@ public class MessageFragment extends Fragment {
             acceptBtn=(Button)convertView.findViewById(R.id.acceptBtn);
             refuseBtn=(Button)convertView.findViewById(R.id.refuseBtn);
 
-//            jobListBean=jobList.get(position);
+            jobListBean=jobList.get(position);
 
-//            jobNameTV.setText(jobListBean.getName());
-//            jobTypeTV.setText(jobListBean.getType());
-//            employeeTV.setText(nameList.get(position));
+            jobNameTV.setText(jobListBean.getName());
+            jobTypeTV.setText(jobListBean.getType());
+            employeeTV.setText(nameList.get(position));
 
             detailBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -147,6 +211,35 @@ public class MessageFragment extends Fragment {
             });
 
             return convertView;
+        }
+    }
+
+    private static class SwipeListViewOnScrollListener implements AbsListView.OnScrollListener{
+
+        private SwipeRefreshLayout mSwipeView;
+        private AbsListView.OnScrollListener mOnScrollListener;
+
+        public SwipeListViewOnScrollListener(SwipeRefreshLayout swipeView,AbsListView.OnScrollListener onScrollListener){
+            mSwipeView=swipeView;
+            mOnScrollListener=onScrollListener;
+        }
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+        }
+
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            View firstView = view.getChildAt(firstVisibleItem);
+
+            if(firstVisibleItem==0&&(firstView==null||firstView.getTop()==0))
+                mSwipeView.setEnabled(true);
+            else
+                mSwipeView.setEnabled(false);
+
+            if(null!=mOnScrollListener)
+                mOnScrollListener.onScroll(view,firstVisibleItem,visibleItemCount,totalItemCount);
         }
     }
 

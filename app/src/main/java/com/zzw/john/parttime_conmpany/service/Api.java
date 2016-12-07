@@ -2,10 +2,13 @@ package com.zzw.john.parttime_conmpany.service;
 
 import com.zzw.john.parttime_conmpany.bean.BaseBean;
 import com.zzw.john.parttime_conmpany.bean.EmployerBeanAll;
+import com.zzw.john.parttime_conmpany.bean.JobBean;
 
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
+import rx.observers.Observers;
 
 /**
  * Created by john on 2016/11/1.
@@ -32,4 +35,16 @@ public interface Api {
     );
 
     //发布兼职
+
+    //获得我发布的所有兼职
+    @POST("job/queryAllMyJob/{employerID}")
+    Observable<JobBean> queryAllMyJob(
+            @Path("employerID") Integer employerID
+    );
+
+    //获得所有应聘人
+    @POST("statusrecord/queryStatusRecordByEmployerID")
+    Observable<JobBean> queryStatusRecordByEmployerID(
+            @Query("employerID") Integer employerID
+    );
 }
