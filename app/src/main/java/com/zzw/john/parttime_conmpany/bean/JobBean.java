@@ -13,6 +13,8 @@ public class JobBean {
 
     private List<String> nameList;
 
+    private List<Integer> idList;
+
     public List<JobListBean> getJobList() {
         return jobList;
     }
@@ -27,6 +29,14 @@ public class JobBean {
 
     public void setNameList(List<String> nameList) {
         this.nameList = nameList;
+    }
+
+    public List<Integer> getIdList() {
+        return idList;
+    }
+
+    public void setIdList(List<Integer> idList) {
+        this.idList = idList;
     }
 
 

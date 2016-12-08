@@ -60,4 +60,12 @@ public interface Api {
             @Query("employerID") Integer employerID
     );
 
+    //处理应聘信息
+    @POST("statusrecord/ReplyRecord")
+    Observable<BaseBean> replyRecord(
+            @Query("employerID") Integer employerID,
+            @Query("employeeID") Integer employeeID,
+            @Query("jobID") Integer jobID,
+            @Query("state") Integer state
+    );
 }
