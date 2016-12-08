@@ -83,6 +83,8 @@ public class CompanyActivity extends AppCompatActivity {
         progressDialog.setCancelable(false);
 
         companyNameTV.setText(employer.getCompanyName());
+        addressET.setText(employer.getLocation());
+        remarkET.setText(employer.getRemark());
 
         companyNameRLO.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,32 +97,32 @@ public class CompanyActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 progressDialog.setMessage("请稍等");
                                 progressDialog.show();
-//                                Observable<BaseBean> register = api.updateName(employer.getId(),editText.getText().toString());
-//                                register.subscribeOn(Schedulers.io())
-//                                        .observeOn(AndroidSchedulers.mainThread())
-//                                        .subscribe(new Subscriber<BaseBean>() {
-//                                            @Override
-//                                            public void onCompleted() {}
-//
-//                                            @Override
-//                                            public void onError(Throwable e) {
-//                                                Logger.d(e);
-//                                                progressDialog.dismiss();
-//                                                UIUtils.showToast("超时,请重试!");
-//                                            }
-//
-//                                            @Override
-//                                            public void onNext(BaseBean baseBean) {
-//                                                progressDialog.dismiss();
-//                                                if (baseBean.getFlag().equals("true")) {
-//                                                    UIUtils.showToast("更改成功");
-//                                                    employer.setCompanyName(editText.getText().toString());
-//                                                    companyNameTV.setText(editText.getText());
-//                                                } else {
-//                                                    UIUtils.showToast("更改失败,请重试");
-//                                                }
-//                                            }
-//                                        });
+                                Observable<BaseBean> register = api.updateCompanyName(employer.getId(),editText.getText().toString());
+                                register.subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Subscriber<BaseBean>() {
+                                            @Override
+                                            public void onCompleted() {}
+
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                Logger.d(e);
+                                                progressDialog.dismiss();
+                                                UIUtils.showToast("超时,请重试!");
+                                            }
+
+                                            @Override
+                                            public void onNext(BaseBean baseBean) {
+                                                progressDialog.dismiss();
+                                                if (baseBean.getFlag().equals("true")) {
+                                                    UIUtils.showToast("更改成功");
+                                                    employer.setCompanyName(editText.getText().toString());
+                                                    companyNameTV.setText(editText.getText());
+                                                } else {
+                                                    UIUtils.showToast("更改失败,请重试");
+                                                }
+                                            }
+                                        });
                             }
                         }).setNegativeButton("取消",null).show();
             }
@@ -146,7 +148,7 @@ public class CompanyActivity extends AppCompatActivity {
     }
 
     private void addOptionBtn(final LinearLayout superLayout, final int source){
-        //source 1:兼职意向 2:个人评价
+        //source 1:公司地址 2:公司备注
         final LinearLayout newLayout=new LinearLayout(this);
         Button confirmBtn=new Button(this);
         Button cancelBtn=new Button(this);
@@ -178,67 +180,69 @@ public class CompanyActivity extends AppCompatActivity {
                 progressDialog.setMessage("请稍等");
                 progressDialog.show();
 
+
+
                 if (source==1){
-//                    editContent=addressET.getText().toString();
-//                    Observable<BaseBean> register = api.updateIntent(employer.getId(),editContent);
-//                    register.subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe(new Subscriber<BaseBean>() {
-//                                @Override
-//                                public void onCompleted() {}
-//
-//                                @Override
-//                                public void onError(Throwable e) {
-//                                    Logger.d(e);
-//                                    progressDialog.dismiss();
-//                                    UIUtils.showToast("超时,请重试!");
-//                                }
-//
-//                                @Override
-//                                public void onNext(BaseBean baseBean) {
-//                                    progressDialog.dismiss();
-//                                    if (baseBean.getFlag().equals("true")) {
-//                                        UIUtils.showToast("更改成功");
-//                                        employer.setIntent(editContent);
-//                                        addressEditLLO.setVisibility(View.VISIBLE);
-//                                        addressET.setInputType(InputType.TYPE_NULL);
-//                                        superLayout.removeView(newLayout);
-//                                    } else {
-//                                        UIUtils.showToast("更改失败,请重试");
-//                                    }
-//                                }
-//                            });
+                    editContent=addressET.getText().toString();
+                    Observable<BaseBean> register = api.updateLocation(employer.getId(),editContent);
+                    register.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<BaseBean>() {
+                                @Override
+                                public void onCompleted() {}
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Logger.d(e);
+                                    progressDialog.dismiss();
+                                    UIUtils.showToast("超时,请重试!");
+                                }
+
+                                @Override
+                                public void onNext(BaseBean baseBean) {
+                                    progressDialog.dismiss();
+                                    if (baseBean.getFlag().equals("true")) {
+                                        UIUtils.showToast("更改成功");
+                                        employer.setLocation(editContent);
+                                        addressEditLLO.setVisibility(View.VISIBLE);
+                                        addressET.setInputType(InputType.TYPE_NULL);
+                                        superLayout.removeView(newLayout);
+                                    } else {
+                                        UIUtils.showToast("更改失败,请重试");
+                                    }
+                                }
+                            });
 
                 }else {
-//                    editContent=remarkET.getText().toString();
-//                    Observable<BaseBean> register = api.updateAdvantage(employer.getId(),editContent);
-//                    register.subscribeOn(Schedulers.io())
-//                            .observeOn(AndroidSchedulers.mainThread())
-//                            .subscribe(new Subscriber<BaseBean>() {
-//                                @Override
-//                                public void onCompleted() {}
-//
-//                                @Override
-//                                public void onError(Throwable e) {
-//                                    Logger.d(e);
-//                                    progressDialog.dismiss();
-//                                    UIUtils.showToast("超时,请重试!");
-//                                }
-//
-//                                @Override
-//                                public void onNext(BaseBean baseBean) {
-//                                    progressDialog.dismiss();
-//                                    if (baseBean.getFlag().equals("true")) {
-//                                        UIUtils.showToast("更改成功");
-//                                        employer.setAdvantage(editContent);
-//                                        remarkEditLLO.setVisibility(View.VISIBLE);
-//                                        remarkET.setInputType(InputType.TYPE_NULL);
-//                                        superLayout.removeView(newLayout);
-//                                    } else {
-//                                        UIUtils.showToast("更改失败,请重试");
-//                                    }
-//                                }
-//                            });
+                    editContent=remarkET.getText().toString();
+                    Observable<BaseBean> register = api.updateRemark(employer.getId(),editContent);
+                    register.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<BaseBean>() {
+                                @Override
+                                public void onCompleted() {}
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    Logger.d(e);
+                                    progressDialog.dismiss();
+                                    UIUtils.showToast("超时,请重试!");
+                                }
+
+                                @Override
+                                public void onNext(BaseBean baseBean) {
+                                    progressDialog.dismiss();
+                                    if (baseBean.getFlag().equals("true")) {
+                                        UIUtils.showToast("更改成功");
+                                        employer.setRemark(editContent);
+                                        remarkEditLLO.setVisibility(View.VISIBLE);
+                                        remarkET.setInputType(InputType.TYPE_NULL);
+                                        superLayout.removeView(newLayout);
+                                    } else {
+                                        UIUtils.showToast("更改失败,请重试");
+                                    }
+                                }
+                            });
 
                 }
 

@@ -43,6 +43,7 @@ public class JobBean {
     public static class JobListBean implements Serializable {
         private String address;
         private String employerID;
+        private int full;
         private int id;
         private String name;
         private int num;
@@ -136,6 +137,14 @@ public class JobBean {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public int getFull() {
+            return full;
+        }
+
+        public void setFull(int full) {
+            this.full = full;
         }
     }
 }

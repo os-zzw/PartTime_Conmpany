@@ -173,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="个人评价"
+                    android:text="公司备注"
                     android:textSize="18dp"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="10dp"
