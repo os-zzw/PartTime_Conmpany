@@ -60,4 +60,33 @@ public interface Api {
             @Query("employerID") Integer employerID
     );
 
+    //处理应聘信息
+    @POST("statusrecord/ReplyRecord")
+    Observable<BaseBean> replyRecord(
+            @Query("employerID") Integer employerID,
+            @Query("employeeID") Integer employeeID,
+            @Query("jobID") Integer jobID,
+            @Query("state") Integer state
+    );
+
+    //更改公司名称
+    @POST("employer/update")
+    Observable<BaseBean> updateCompanyName(
+            @Query("id") Integer id,
+            @Query("companyName")  String companyName
+    );
+
+    //更改公司地址
+    @POST("employer/update")
+    Observable<BaseBean> updateLocation(
+            @Query("id") Integer id,
+            @Query("location")  String location
+    );
+
+    //更改公司备注
+    @POST("employer/update")
+    Observable<BaseBean> updateRemark(
+            @Query("id") Integer id,
+            @Query("remark")  String remark
+    );
 }

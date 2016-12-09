@@ -110,7 +110,7 @@ public class RecordActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            TextView jobNameTV,jobTypeTV,jobSexTV,jobSalaryTV,jobNumTV;
+            TextView jobNameTV,jobTypeTV,jobSexTV,jobSalaryTV,jobNumTV,jobStateTV;
             Button detailBtn;
 
             final JobBean.JobListBean jobListBean;
@@ -124,6 +124,7 @@ public class RecordActivity extends AppCompatActivity {
             jobSexTV=(TextView)convertView.findViewById(R.id.jobSexTV);
             jobSalaryTV=(TextView)convertView.findViewById(R.id.jobSalaryTV);
             jobNumTV=(TextView)convertView.findViewById(R.id.jobNumTV);
+            jobStateTV=(TextView)convertView.findViewById(R.id.jobStateTV);
             detailBtn=(Button)convertView.findViewById(R.id.detailBtn);
 
             jobListBean=jobList.get(position);
@@ -133,6 +134,14 @@ public class RecordActivity extends AppCompatActivity {
             jobSexTV.setText(jobListBean.getSex());
             jobSalaryTV.setText(jobListBean.getSalary());
             jobNumTV.setText(Integer.toString(jobListBean.getNum()));
+            if (jobListBean.getFull()==0) {
+                jobStateTV.setText("未完成");
+                jobStateTV.setBackgroundColor(Color.GRAY);
+            }else{
+                jobStateTV.setText("已完成");
+                jobStateTV.setBackgroundColor(Color.GREEN);
+            }
+
 
             detailBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

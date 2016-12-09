@@ -14,12 +14,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/stateTV"
+            android:id="@+id/jobStateTV"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:textSize="22dp"
+            android:textSize="21dp"
             android:gravity="center"
-            android:textColor="#000"/>
+            android:textColor="#000"
+            android:text="兼职状态"/>
 
         <Button
             android:id="@+id/detailBtn"
@@ -58,8 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="工作类型:"/>
 
             <TextView
@@ -67,8 +69,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/typeTV"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="周末兼职"/>
 
             <TextView
@@ -76,16 +79,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="不限"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/jobSexTV"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="性别要求:"/>
 
         </RelativeLayout>
@@ -100,8 +105,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="薪资:"/>
 
             <TextView
@@ -109,8 +115,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toRightOf="@+id/salaryTV"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="200-500"/>
 
             <TextView
@@ -118,16 +125,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="不限"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/jobNumTV"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textColor="#000"
+                android:gravity="center"
                 android:text="人数需求:"/>
 
         </RelativeLayout>

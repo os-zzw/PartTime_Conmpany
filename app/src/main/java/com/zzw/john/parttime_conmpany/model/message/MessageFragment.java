@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 import com.zzw.john.parttime_conmpany.R;
 import com.zzw.john.parttime_conmpany.base.MyApplication;
+import com.zzw.john.parttime_conmpany.bean.BaseBean;
 import com.zzw.john.parttime_conmpany.bean.JobBean;
 import com.zzw.john.parttime_conmpany.componments.ApiClient;
 import com.zzw.john.parttime_conmpany.service.Api;
@@ -118,7 +119,7 @@ public class MessageFragment extends Fragment {
                             progressDialog.dismiss();
                         else
                             refreshHandler.sendEmptyMessage(0);
-                        messageLV.setAdapter(new MessageListAdapter(jobBean.getJobList(),jobBean.getNameList()));
+                        messageLV.setAdapter(new MessageListAdapter(jobBean.getJobList(),jobBean.getNameList(),jobBean.getIdList()));
                     }
                 });
     }
@@ -139,11 +140,13 @@ public class MessageFragment extends Fragment {
         private LayoutInflater layoutInflater;
         private List<JobBean.JobListBean> jobList;
         private List<String> nameList;
+        private List<Integer> idList;
 
-        public MessageListAdapter(List<JobBean.JobListBean> jobList, List<String> nameList){
+        public MessageListAdapter(List<JobBean.JobListBean> jobList, List<String> nameList,List<Integer> idList){
             this.layoutInflater=LayoutInflater.from(UIUtils.getContext());
             this.jobList=jobList;
             this.nameList=nameList;
+            this.idList=idList;
         }
 
         @Override
@@ -162,7 +165,7 @@ public class MessageFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
 
             TextView jobNameTV,jobTypeTV,employeeTV;
             Button detailBtn,acceptBtn,refuseBtn;
@@ -199,14 +202,72 @@ public class MessageFragment extends Fragment {
             acceptBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    messageSRLO.setRefreshing(true);
+                    progressDialog.show();
+                    Observable<BaseBean> baseBeanObservable=api.replyRecord(MyApplication.employerBean.getId(),idList.get(position),
+                                                        jobListBean.getId(),1);
+                    baseBeanObservable.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<BaseBean>() {
+                                @Override
+                                public void onCompleted() {
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    progressDialog.dismiss();
+                                    Logger.d(e);
+                                    UIUtils.showToast("超时,请重试!");
+                                }
+
+                                @Override
+                                public void onNext(BaseBean baseBean) {
+                                    progressDialog.dismiss();
+                                    if (baseBean.getFlag().equals("true")){
+                                        UIUtils.showToast("接受成功");
+                                        initData(1);
+                                    }else {
+                                        UIUtils.showToast("接受失败,请重试");
+                                    }
+
+                                }
+                            });
                 }
             });
 
             refuseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    messageSRLO.setRefreshing(false);
+                    progressDialog.show();
+                    Observable<BaseBean> baseBeanObservable=api.replyRecord(MyApplication.employerBean.getId(),idList.get(position),
+                            jobListBean.getId(),2);
+                    baseBeanObservable.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Subscriber<BaseBean>() {
+                                @Override
+                                public void onCompleted() {
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    progressDialog.dismiss();
+                                    Logger.d(e);
+                                    UIUtils.showToast("超时,请重试!");
+                                }
+
+                                @Override
+                                public void onNext(BaseBean baseBean) {
+                                    progressDialog.dismiss();
+                                    if (baseBean.getFlag().equals("true")){
+                                        UIUtils.showToast("拒绝成功");
+                                        initData(1);
+                                    }else {
+                                        UIUtils.showToast("拒绝失败,请重试");
+                                    }
+
+                                }
+                            });
                 }
             });
 
