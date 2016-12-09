@@ -59,7 +59,7 @@ public class ReleaseActivity extends AppCompatActivity {
 
         adapter1=ArrayAdapter.createFromResource(this, R.array.ctype, android.R.layout.simple_dropdown_item_1line);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        String[] ctype={ "全部兼职", "优质兼职", "附近兼职", "周末兼职" };
+        String[] ctype={ "全部兼职", "优质兼职", "附近兼职", "周末兼职","微任务" };
 
         adapter2=new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ctype);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -114,27 +114,34 @@ public class ReleaseActivity extends AppCompatActivity {
             place=Place.getText().toString();
             remarks=Remarks.getText().toString();
             num =Integer.valueOf(Num.getText().toString()).intValue();
-            Observable<JobBean> ADD = api.add(Integer.toString(MyApplication.employerBean.getId()),result,jobname,sex,salary,place,remarks,num);
-            ADD.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<JobBean>() {
-                        @Override
-                        public void onCompleted() {
+            if((MyApplication.employerBean.getCompanyName()).isEmpty()){
+                Toast.makeText(ReleaseActivity.this, "请填写公司名", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Observable<JobBean> ADD = api.add(Integer.toString(MyApplication.employerBean.getId()), result, jobname, sex, salary, place, remarks, num);
+                ADD.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<JobBean>() {
+                                       @Override
+                                       public void onCompleted() {
 
-                        }
-                        @Override
-                        public void onError(Throwable e) {
-                            Logger.d(e);
-                            Toast.makeText(ReleaseActivity.this, "出现错误,请重试!", Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onNext(JobBean jobBean){
-                            ReleaseActivity.this.finish();
-                        }
-                        }
+                                       }
 
-                    );
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           Logger.d(e);
+                                           Toast.makeText(ReleaseActivity.this, "出现错误,请重试!", Toast.LENGTH_SHORT).show();
+                                       }
 
+                                       @Override
+                                       public void onNext(JobBean jobBean) {
+                                           Toast.makeText(ReleaseActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                                           ReleaseActivity.this.finish();
+                                       }
+                                   }
+
+                        );
+            }
         }
     };
 

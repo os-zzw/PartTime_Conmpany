@@ -208,7 +208,6 @@
             android:layout_centerHorizontal="true"
             android:gravity="top"
             android:inputType="textPersonName"
-            android:text="工作相关备注"
             android:textSize="15dp"
             android:background="#C2C2C2"
             android:id="@+id/editText4"
@@ -222,7 +221,7 @@
         >
 
         <Button
-            android:text="提交"
+            android:text="发布"
             android:textSize="20dp"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
