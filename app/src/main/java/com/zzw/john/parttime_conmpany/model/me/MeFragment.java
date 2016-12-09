@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zzw.john.parttime_conmpany.R;
+import com.zzw.john.parttime_conmpany.base.MyApplication;
 import com.zzw.john.parttime_conmpany.utils.UIUtils;
 
 
@@ -33,7 +34,7 @@ public class MeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_me, null);
 
         userNameTV=(TextView)view.findViewById(R.id.userNameTV);
-        //userNameTV.setText(MyApplication.employeeBean.getNickname());
+        userNameTV.setText(MyApplication.employerBean.getNickname());
 
         choiceLV=(ListView)view.findViewById(R.id.choiceLV);
         choiceLV.setAdapter(new MeListAdapter());
@@ -82,16 +83,21 @@ public class MeFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             TextView listNameTV;
+            ImageView listPicIV;
             if (convertView==null){
                 convertView=layoutInflater.inflate(R.layout.list_me_item,null);
             }
 
             listNameTV=(TextView)convertView.findViewById(R.id.listNameTV);
+            listPicIV=(ImageView)convertView.findViewById(R.id.listPicIV);
             if (position==0) {
+                listPicIV.setImageDrawable(getResources().getDrawable(R.mipmap.companyinfo));
                 listNameTV.setText("公司信息");
             }else if (position==1){
+                listPicIV.setImageDrawable(getResources().getDrawable(R.mipmap.myrelease));
                 listNameTV.setText("我的发布");
             }else{
+                listPicIV.setImageDrawable(getResources().getDrawable(R.mipmap.release));
                 listNameTV.setText("发布兼职");
             }
             return convertView;

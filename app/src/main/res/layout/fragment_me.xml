@@ -10,7 +10,7 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:background="#000"/>
+        android:background="@mipmap/avatar"/>
 
     <TextView
         android:id="@+id/userNameTV"

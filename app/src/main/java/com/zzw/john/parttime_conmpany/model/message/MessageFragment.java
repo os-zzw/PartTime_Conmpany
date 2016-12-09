@@ -46,7 +46,6 @@ public class MessageFragment extends Fragment {
     private ListView messageLV;
     private ScrollView messageSV;
     private SwipeRefreshLayout messageSRLO;
-    private ProgressDialog progressDialog;
 
     private Api api;
 
@@ -87,10 +86,6 @@ public class MessageFragment extends Fragment {
             }
         });
 
-        progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("请稍等");
-        progressDialog.show();
     }
 
     private void initData(final int type) {
@@ -105,9 +100,7 @@ public class MessageFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (type==0)
-                            progressDialog.dismiss();
-                        else
+                        if (type!=0)
                             refreshHandler.sendEmptyMessage(0);
                         Logger.d(e);
                         UIUtils.showToast("超时,请重试!");
@@ -115,9 +108,7 @@ public class MessageFragment extends Fragment {
 
                     @Override
                     public void onNext(JobBean jobBean) {
-                        if (type==0)
-                            progressDialog.dismiss();
-                        else
+                        if (type!=0)
                             refreshHandler.sendEmptyMessage(0);
                         messageLV.setAdapter(new MessageListAdapter(jobBean.getJobList(),jobBean.getNameList(),jobBean.getIdList()));
                     }
@@ -202,7 +193,6 @@ public class MessageFragment extends Fragment {
             acceptBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    progressDialog.show();
                     Observable<BaseBean> baseBeanObservable=api.replyRecord(MyApplication.employerBean.getId(),idList.get(position),
                                                         jobListBean.getId(),1);
                     baseBeanObservable.subscribeOn(Schedulers.io())
@@ -215,14 +205,12 @@ public class MessageFragment extends Fragment {
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    progressDialog.dismiss();
                                     Logger.d(e);
                                     UIUtils.showToast("超时,请重试!");
                                 }
 
                                 @Override
                                 public void onNext(BaseBean baseBean) {
-                                    progressDialog.dismiss();
                                     if (baseBean.getFlag().equals("true")){
                                         UIUtils.showToast("接受成功");
                                         initData(1);
@@ -238,7 +226,6 @@ public class MessageFragment extends Fragment {
             refuseBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    progressDialog.show();
                     Observable<BaseBean> baseBeanObservable=api.replyRecord(MyApplication.employerBean.getId(),idList.get(position),
                             jobListBean.getId(),2);
                     baseBeanObservable.subscribeOn(Schedulers.io())
@@ -251,14 +238,12 @@ public class MessageFragment extends Fragment {
 
                                 @Override
                                 public void onError(Throwable e) {
-                                    progressDialog.dismiss();
                                     Logger.d(e);
                                     UIUtils.showToast("超时,请重试!");
                                 }
 
                                 @Override
                                 public void onNext(BaseBean baseBean) {
-                                    progressDialog.dismiss();
                                     if (baseBean.getFlag().equals("true")){
                                         UIUtils.showToast("拒绝成功");
                                         initData(1);

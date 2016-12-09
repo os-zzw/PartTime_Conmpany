@@ -6,8 +6,7 @@
     <ImageView
         android:id="@+id/listPicIV"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="#000"/>
+        android:layout_height="50dp"/>
     
     <TextView
         android:id="@+id/listNameTV"
@@ -24,6 +23,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:background="#000"/>
+        android:background="@mipmap/arrow"/>
 
 </RelativeLayout>
