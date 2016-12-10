@@ -23,6 +23,7 @@
         <activity android:name=".model.me.ReleaseActivity" />
         <activity android:name=".model.me.CompanyActivity" />
         <activity android:name=".model.me.RecordActivity"></activity>
+        <activity android:name=".model.message.JobDetailActivity"></activity>
     </application>
 
 </manifest>

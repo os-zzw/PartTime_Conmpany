@@ -183,10 +183,10 @@ public class MessageFragment extends Fragment {
             detailBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent jobDetail = new Intent(getActivity(), JobDetailActivity.class);
-//                    jobDetail.putExtra("bean",jobListBean);
-//                    jobDetail.putExtra("from","MessageFragment");
-//                    startActivity(jobDetail);
+                    Intent jobDetail = new Intent(getActivity(), JobDetailActivity.class);
+                    jobDetail.putExtra("bean",jobListBean);
+                    jobDetail.putExtra("from","MessageFragment");
+                    startActivity(jobDetail);
                 }
             });
 

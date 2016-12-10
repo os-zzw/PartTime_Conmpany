@@ -18,6 +18,7 @@ import com.zzw.john.parttime_conmpany.R;
 import com.zzw.john.parttime_conmpany.base.MyApplication;
 import com.zzw.john.parttime_conmpany.bean.JobBean;
 import com.zzw.john.parttime_conmpany.componments.ApiClient;
+import com.zzw.john.parttime_conmpany.model.message.JobDetailActivity;
 import com.zzw.john.parttime_conmpany.service.Api;
 import com.zzw.john.parttime_conmpany.utils.UIUtils;
 
@@ -146,7 +147,10 @@ public class RecordActivity extends AppCompatActivity {
             detailBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent jobDetail = new Intent(RecordActivity.this, JobDetailActivity.class);
+                    jobDetail.putExtra("bean",jobListBean);
+                    jobDetail.putExtra("from","RecordActivity");
+                    startActivity(jobDetail);
                 }
             });
 
