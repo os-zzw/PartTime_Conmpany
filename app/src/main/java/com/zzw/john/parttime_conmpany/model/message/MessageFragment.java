@@ -16,10 +16,12 @@ import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.github.lzyzsd.randomcolor.RandomColor;
 import com.orhanobut.logger.Logger;
 import com.zzw.john.parttime_conmpany.R;
 import com.zzw.john.parttime_conmpany.base.MyApplication;
@@ -30,6 +32,7 @@ import com.zzw.john.parttime_conmpany.service.Api;
 import com.zzw.john.parttime_conmpany.utils.UIUtils;
 
 import java.util.List;
+import java.util.Random;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -159,6 +162,7 @@ public class MessageFragment extends Fragment {
         public View getView(final int position, View convertView, ViewGroup parent) {
 
             TextView jobNameTV,jobTypeTV,employeeTV;
+            ImageView avatarTV;
             Button detailBtn,acceptBtn,refuseBtn;
 
             final JobBean.JobListBean jobListBean;
@@ -167,12 +171,15 @@ public class MessageFragment extends Fragment {
                 convertView=layoutInflater.inflate(R.layout.list_message_item,null);
             }
 
+            avatarTV=(ImageView)convertView.findViewById(R.id.avatarIV);
             jobNameTV=(TextView)convertView.findViewById(R.id.jobNameTV);
             jobTypeTV=(TextView)convertView.findViewById(R.id.jobTypeTV);
             employeeTV=(TextView)convertView.findViewById(R.id.employeeTV);
             detailBtn=(Button)convertView.findViewById(R.id.detailBtn);
             acceptBtn=(Button)convertView.findViewById(R.id.acceptBtn);
             refuseBtn=(Button)convertView.findViewById(R.id.refuseBtn);
+
+            avatarTV.setBackgroundColor(new RandomColor().randomColor());
 
             jobListBean=jobList.get(position);
 

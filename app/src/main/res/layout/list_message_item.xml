@@ -14,9 +14,9 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/avatarIV"
             android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:background="#000"/>
+            android:layout_height="70dp" />
 
         <TextView
             android:id="@+id/employeeTV"
