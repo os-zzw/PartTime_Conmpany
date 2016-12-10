@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.zzw.john.parttime_conmpany.model.index.IndexFragment;
 import com.zzw.john.parttime_conmpany.model.me.MeFragment;
 import com.zzw.john.parttime_conmpany.model.message.MessageFragment;
 
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     SegmentTabLayout mTl;
     @BindView(R.id.vp)
     ViewPager mVp;
-    private String[] titles = {"首页", "消息", "我的"};
+    private String[] titles = {"消息", "我的"};
     private List<Fragment> mFragments = new ArrayList<>();
 
     @Override
@@ -33,14 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         initData();
         initView();
-
     }
 
     private void initData() {
-        mFragments.add(new IndexFragment());
         mFragments.add(new MessageFragment());
         mFragments.add(new MeFragment());
     }
