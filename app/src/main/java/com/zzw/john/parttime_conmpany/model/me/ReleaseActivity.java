@@ -59,7 +59,7 @@ public class ReleaseActivity extends AppCompatActivity {
 
         adapter1=ArrayAdapter.createFromResource(this, R.array.ctype, android.R.layout.simple_dropdown_item_1line);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        String[] ctype={ "全部兼职", "优质兼职", "附近兼职", "周末兼职","微任务" };
+        String[] ctype={ "全部兼职", "优质兼职", "附近兼职", "周末兼职","微任务" ,"找实习"};
 
         adapter2=new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ctype);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
